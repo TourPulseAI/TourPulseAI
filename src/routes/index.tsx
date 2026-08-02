@@ -1,18 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { readFile } from "node:fs/promises";
-
-// Der Business-Name kommt aus site.json (zur Laufzeit gelesen, kein Rebuild nötig).
-const getBusinessName = createServerFn({ method: "GET" }).handler(async () => {
-  try {
-    const cfg = JSON.parse(await readFile("site.json", "utf8")) as {
-      businessName?: string;
-    };
-    return cfg.businessName?.trim() ?? "";
-  } catch {
-    return "";
-  }
-});
+import {
+  Eyebrow,
+  Footer,
+  HandNote,
+  Header,
+  Icon,
+  Squiggle,
+  getBusinessName,
+  icons,
+} from "~/components/site";
 
 export const Route = createFileRoute("/")({
   loader: () => getBusinessName(),
@@ -20,100 +16,8 @@ export const Route = createFileRoute("/")({
 });
 
 /* ------------------------------------------------------------------ */
-/* Kleine SVG-Icons (nur was wirklich gebraucht wird)                   */
-/* ------------------------------------------------------------------ */
-
-function Icon({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={className}
-    >
-      {children}
-    </svg>
-  );
-}
-
-const icons = {
-  pulse: <path d="M2 12h4l2-6 4 12 2-6h8" />,
-  check: <path d="M20 6 9 17l-5-5" />,
-  arrow: (
-    <>
-      <path d="M5 12h14" />
-      <path d="m13 6 6 6-6 6" />
-    </>
-  ),
-  mail: (
-    <>
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m2 7 10 6 10-6" />
-    </>
-  ),
-};
-
-/* ------------------------------------------------------------------ */
 /* Kleine Bausteine mit Hand-Charakter                                  */
 /* ------------------------------------------------------------------ */
-
-/** Handgezeichnet wirkender Unterstrich */
-function Squiggle({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 220 12"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-    >
-      <path
-        d="M3 8C40 3 70 10 110 6s70 6 107 3"
-        stroke="currentColor"
-        strokeWidth={4.5}
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-/** Editoriale Sektions-Überschrift: Nummer · Linie · Label */
-function Eyebrow({
-  nr,
-  label,
-  dark = false,
-}: {
-  nr: string;
-  label: string;
-  dark?: boolean;
-}) {
-  return (
-    <p
-      className={`flex items-center gap-3 ${
-        dark ? "text-sand-300" : "text-pine-600"
-      }`}
-    >
-      <span className="font-display text-lg italic">{nr}</span>
-      <span
-        className={`h-px w-10 ${
-          dark ? "bg-sand-300/50" : "bg-pine-400/60"
-        }`}
-      />
-      <span className="text-sm font-bold uppercase tracking-[0.18em]">
-        {label}
-      </span>
-    </p>
-  );
-}
 
 /**
  * Ruhige Abschnitts-Überschrift: Eyebrow + große Serif-Headline,
@@ -144,23 +48,6 @@ function SectionHeader({
         </HandNote>
       )}
     </div>
-  );
-}
-
-/** Handgeschriebene Randnotiz */
-function HandNote({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <p
-      className={`font-hand text-2xl leading-snug text-pine-700 ${className}`}
-    >
-      {children}
-    </p>
   );
 }
 
@@ -198,66 +85,6 @@ function PhotoCard({
         </figcaption>
       )}
     </figure>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Logo                                                                 */
-/* ------------------------------------------------------------------ */
-
-function Logo({ businessName, light }: { businessName: string; light?: boolean }) {
-  return (
-    <a href="#start" className="flex items-center gap-2.5">
-      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-pine-800 text-sand-100">
-        <Icon className="h-5 w-5">{icons.pulse}</Icon>
-      </span>
-      <span
-        className={`font-display text-lg font-semibold tracking-tight ${
-          light ? "text-sand-50" : "text-pine-950"
-        }`}
-      >
-        {businessName}
-      </span>
-    </a>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Header                                                               */
-/* ------------------------------------------------------------------ */
-
-function Header({ businessName }: { businessName: string }) {
-  const nav = [
-    { href: "#funktionen", label: "Funktionen" },
-    { href: "#zielgruppen", label: "Zielgruppen" },
-    { href: "#pakete", label: "Pakete" },
-  ];
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-pine-900/5 bg-sand-50/85 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Logo businessName={businessName} />
-        <nav className="hidden items-center gap-2.5 md:flex">
-          {nav.map((n) => (
-            <a
-              key={n.href}
-              href={n.href}
-              className="group inline-flex items-center gap-1.5 rounded-full border-2 border-pine-700/25 bg-sand-100 px-4 py-1.5 text-sm font-bold text-pine-900 shadow-sm transition hover:-translate-y-0.5 hover:border-pine-700 hover:bg-sand-200 hover:shadow-md"
-            >
-              {n.label}
-              <Icon className="h-3.5 w-3.5 text-pine-500 transition group-hover:translate-x-0.5 group-hover:text-pine-800">
-                {icons.arrow}
-              </Icon>
-            </a>
-          ))}
-        </nav>
-        <a
-          href="#beta"
-          className="rounded-full bg-pine-800 px-4 py-2 text-sm font-semibold text-sand-50 shadow-sm transition hover:bg-pine-700"
-        >
-          Beta-Zugang
-        </a>
-      </div>
-    </header>
   );
 }
 
@@ -347,10 +174,10 @@ function Hero({ businessName }: { businessName: string }) {
 
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-pine-900/75">
             {businessName} ist das Planungs-Dashboard für kleine Hotels,
-            Ferienwohnungen, Campingplätze und Tourenanbieter: Es sagt
-            Ankünfte und Auslastung voraus, schlägt passende Preise vor und
-            zeigt, wo sich ein Angebot lohnt – gebaut für Betriebe, die
-            selbst führen, ohne Datenabteilung.
+            Ferienwohnungen, Campingplätze und Tourenanbieter: Es sagt Ankünfte
+            und Auslastung voraus, schlägt passende Preise vor und zeigt, wo
+            sich ein Angebot lohnt – gebaut für Betriebe, die selbst führen,
+            ohne Datenabteilung.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -614,10 +441,10 @@ function Audiences() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <p className="max-w-md text-lg leading-relaxed text-pine-900/75">
-                TourPulse AI richtet sich an Betriebe, die selbst führen –
-                und keine Datenabteilung haben. Ob Hotel, Ferienwohnung,
-                Campingplatz oder Tourenanbieter: Die Bedienung bleibt
-                dieselbe, nur Ihre Zahlen sind anders.
+                TourPulse AI richtet sich an Betriebe, die selbst führen – und
+                keine Datenabteilung haben. Ob Hotel, Ferienwohnung,
+                Campingplatz oder Tourenanbieter: Die Bedienung bleibt dieselbe,
+                nur Ihre Zahlen sind anders.
               </p>
               <HandNote className="mt-6 -rotate-1">
                 Wir richten uns nach Ihrem Alltag, nicht umgekehrt.
@@ -727,18 +554,17 @@ function Plans() {
                 </h3>
                 <p className="mt-4 max-w-2xl leading-relaxed text-pine-900/75">
                   Erst ausprobieren, dann entscheiden: Sobald der Test
-                  freigeschaltet ist, schauen Sie sich 24 Stunden lang alles
-                  in Ruhe an – am besten mit Ihren eigenen Zahlen. Danach
-                  entscheiden Sie, ob Basic, Pro oder doch nichts für Sie
-                  ist.
+                  freigeschaltet ist, schauen Sie sich 24 Stunden lang alles in
+                  Ruhe an – am besten mit Ihren eigenen Zahlen. Danach
+                  entscheiden Sie, ob Basic, Pro oder doch nichts für Sie ist.
                 </p>
                 <p className="mt-5 max-w-2xl rounded-xl border border-pine-900/10 bg-white px-4 py-3 text-sm leading-relaxed text-pine-900/70">
                   <strong className="font-semibold text-pine-800">
                     Ehrlich gesagt:
                   </strong>{" "}
-                  Das Test-System bauen wir gerade noch. Es gibt aktuell
-                  keine Anmeldung und keine Zahlung – aber Sie können sich
-                  gern schon auf die Liste setzen lassen.
+                  Das Test-System bauen wir gerade noch. Es gibt aktuell keine
+                  Anmeldung und keine Zahlung – aber Sie können sich gern schon
+                  auf die Liste setzen lassen.
                 </p>
                 <a
                   href="#beta"
@@ -862,8 +688,8 @@ function Plans() {
             ))}
           </div>
           <p className="mt-4 text-sm text-pine-900/60">
-            Zusatzfunktionen können einzeln oder im Paket dazu gebucht
-            werden. Details und Preise folgen mit dem Produktstart.
+            Zusatzfunktionen können einzeln oder im Paket dazu gebucht werden.
+            Details und Preise folgen mit dem Produktstart.
           </p>
           <HandNote className="mt-4 -rotate-1 text-pine-700/80">
             Ideen? Wir bauen nach Ihrem Feedback.
@@ -889,10 +715,10 @@ function BetaCta() {
               Wir bauen das gerade – und freuen uns auf Ihr Feedback.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-sand-100/75">
-              Als Beta-Tester:in testen Sie das Dashboard als Erste, sobald
-              der erste Prototyp bereit ist – und helfen uns mit Ihrem
-              Feedback, es für Ihren Betrieb noch besser zu machen. Sie
-              verpflichten sich zu nichts.
+              Als Beta-Tester:in testen Sie das Dashboard als Erste, sobald der
+              erste Prototyp bereit ist – und helfen uns mit Ihrem Feedback, es
+              für Ihren Betrieb noch besser zu machen. Sie verpflichten sich zu
+              nichts.
             </p>
 
             <a
@@ -904,11 +730,11 @@ function BetaCta() {
             </a>
 
             <p className="mt-5 max-w-md text-sm leading-relaxed text-sand-100/60">
-              Noch kein Online-Formular – die Anmeldung läuft vorerst direkt
-              aus Ihrem Mailprogramm. Ein Anmelde-Formular folgt.{" "}
+              Noch kein Online-Formular – die Anmeldung läuft vorerst direkt aus
+              Ihrem Mailprogramm. Ein Anmelde-Formular folgt.{" "}
               <span className="text-sand-100/45">
-                (Kontaktadresse vorläufig, bis das Anmelde-System
-                eingerichtet ist.)
+                (Kontaktadresse vorläufig, bis das Anmelde-System eingerichtet
+                ist.)
               </span>
             </p>
           </div>
@@ -932,52 +758,6 @@ function BetaCta() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Footer                                                               */
-/* ------------------------------------------------------------------ */
-
-function Footer({ businessName }: { businessName: string }) {
-  return (
-    <footer className="border-t border-pine-800 bg-pine-950 py-12 text-sand-100/60">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-4 sm:px-6 md:flex-row md:items-start">
-        <div className="max-w-xs text-center md:text-left">
-          <Logo businessName={businessName} light />
-          <p className="mt-4 text-sm leading-relaxed">
-            Das KI-gestützte Dashboard für kleine Hotels, Ferienwohnungen,
-            Campingplätze und Tourenanbieter.
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-sand-200/70">
-            Bald: 24 Stunden kostenlos testen – ohne Zahlungspflicht.
-          </p>
-        </div>
-
-        <nav className="flex gap-8 text-sm">
-          <a href="#funktionen" className="transition hover:text-sand-50">
-            Funktionen
-          </a>
-          <a href="#zielgruppen" className="transition hover:text-sand-50">
-            Zielgruppen
-          </a>
-          <a href="#pakete" className="transition hover:text-sand-50">
-            Pakete
-          </a>
-          <a href="#beta" className="transition hover:text-sand-50">
-            Beta-Zugang
-          </a>
-        </nav>
-      </div>
-
-      <div className="mx-auto mt-10 max-w-6xl border-t border-pine-800 px-4 pt-6 text-center text-xs text-sand-100/40 sm:px-6 md:text-left">
-        <p>
-          © 2026 TourPulse AI. Vorschau-Seite: Das Produkt befindet sich in
-          Entwicklung, es finden derzeit keine Zahlungen statt. Alle Preise
-          sind Vorschau. Impressum und Datenschutzerklärung folgen.
-        </p>
-      </div>
-    </footer>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Seite                                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -985,7 +765,7 @@ function Home() {
   const businessName = Route.useLoaderData() || "TourPulse AI";
   return (
     <>
-      <Header businessName={businessName} />
+      <Header businessName={businessName} home />
       <main>
         <Hero businessName={businessName} />
         <Features />
@@ -993,7 +773,7 @@ function Home() {
         <Plans />
         <BetaCta />
       </main>
-      <Footer businessName={businessName} />
+      <Footer businessName={businessName} home />
     </>
   );
 }
