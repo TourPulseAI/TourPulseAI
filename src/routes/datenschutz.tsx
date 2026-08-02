@@ -111,11 +111,16 @@ function Datenschutz() {
             Ihrer Anfrage).
           </P>
           <P>
-            Es besteht derzeit <strong>kein Kontaktformular</strong> auf dieser
-            Website. Ihre E-Mail-Nachricht wird nicht auf einem Server dieser
-            Website gespeichert, sondern ausschließlich in unserem
-            E-Mail-Postfach verarbeitet. Eine Weitergabe an Dritte erfolgt
-            nicht.
+            Das Beta-Anmeldeformular speichert Name (optional), E-Mail-Adresse
+            und Betriebsart zur Bearbeitung der Beta-Anmeldung in einer
+            Datenbank. Die Angaben werden auf Wunsch gelöscht. Für Auskunft
+            oder Löschung erreichen Sie uns unter {contact}. Das Formular
+            versendet keine E-Mail automatisch.
+          </P>
+          <P>
+            Ihre E-Mail-Nachricht wird nicht auf einem Server dieser Website
+            gespeichert, sondern ausschließlich in unserem E-Mail-Postfach
+            verarbeitet. Eine Weitergabe an Dritte erfolgt nicht.
           </P>
         </section>
 

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   Eyebrow,
   Footer,
@@ -705,6 +706,31 @@ function Plans() {
 /* ------------------------------------------------------------------ */
 
 function BetaCta() {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("sending");
+    setMessage("");
+    const form = new FormData(event.currentTarget);
+    try {
+      const response = await fetch("/api/beta-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(form.entries())),
+      });
+      const data = (await response.json()) as { ok?: boolean; error?: string };
+      if (!response.ok) throw new Error(data.error || "Die Anmeldung konnte nicht gespeichert werden.");
+      setStatus("success");
+      setMessage("Vielen Dank! Wir melden uns, sobald der Beta-Test startet.");
+      event.currentTarget.reset();
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Die Anmeldung konnte gerade nicht gespeichert werden.");
+    }
+  }
+
   return (
     <section id="beta" className="bg-pine-950 py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -717,26 +743,23 @@ function BetaCta() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-sand-100/75">
               Als Beta-Tester:in testen Sie das Dashboard als Erste, sobald der
               erste Prototyp bereit ist – und helfen uns mit Ihrem Feedback, es
-              für Ihren Betrieb noch besser zu machen. Sie verpflichten sich zu
-              nichts.
+              für Ihren Betrieb noch besser zu machen. Sie verpflichten sich zu nichts.
             </p>
 
-            <a
-              href="mailto:info-vertexsoftware@gmx.net?subject=Beta-Zugang%20TourPulse%20AI"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-sand-100 px-8 py-4 text-base font-semibold text-pine-950 shadow-lg shadow-black/20 transition hover:bg-white"
-            >
-              Beta-Zugang per E-Mail anfragen
-              <Icon className="h-5 w-5">{icons.arrow}</Icon>
-            </a>
+            <form onSubmit={submit} className="mt-8 max-w-xl rounded-2xl bg-sand-50 p-5 text-pine-950 shadow-xl sm:p-6">
+              <p className="font-display text-xl font-semibold">Auf die Beta-Liste setzen</p>
+              <p className="mt-1 text-sm text-pine-900/65">Bald: 24 Stunden kostenlos testen. Das Test-System ist noch in Entwicklung.</p>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <label className="text-sm font-semibold">Name <span className="font-normal text-pine-900/55">(optional)</span><input name="name" type="text" maxLength={120} autoComplete="name" className="mt-1.5 w-full rounded-lg border border-pine-900/20 bg-white px-3 py-2.5 font-normal outline-none focus:border-pine-600 focus:ring-2 focus:ring-pine-200" /></label>
+                <label className="text-sm font-semibold">E-Mail <span className="text-pine-600">*</span><input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1.5 w-full rounded-lg border border-pine-900/20 bg-white px-3 py-2.5 font-normal outline-none focus:border-pine-600 focus:ring-2 focus:ring-pine-200" /></label>
+              </div>
+              <label className="mt-4 block text-sm font-semibold">Betriebsart <span className="text-pine-600">*</span><select name="businessType" required defaultValue="" className="mt-1.5 w-full rounded-lg border border-pine-900/20 bg-white px-3 py-2.5 font-normal outline-none focus:border-pine-600 focus:ring-2 focus:ring-pine-200"><option value="" disabled>Bitte auswählen</option><option>Kleines Hotel/Pension</option><option>Ferienwohnung</option><option>Campingplatz</option><option>Tourenanbieter</option><option>Sonstiges</option></select></label>
+              <button disabled={status === "sending"} type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-pine-800 px-6 py-3 font-semibold text-sand-50 transition hover:bg-pine-700 disabled:cursor-wait disabled:opacity-60">{status === "sending" ? "Wird gespeichert …" : "Beta-Zugang anfragen"}<Icon className="h-4 w-4">{icons.arrow}</Icon></button>
+              {message && <p role="status" className={`mt-4 rounded-lg px-3 py-2 text-sm leading-relaxed ${status === "success" ? "bg-pine-100 text-pine-900" : "bg-red-100 text-red-900"}`}>{message}</p>}
+            </form>
 
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-sand-100/60">
-              Noch kein Online-Formular – die Anmeldung läuft vorerst direkt aus
-              Ihrem Mailprogramm. Ein Anmelde-Formular folgt.{" "}
-              <span className="text-sand-100/45">
-                (Kontaktadresse vorläufig, bis das Anmelde-System eingerichtet
-                ist.)
-              </span>
-            </p>
+            <a href="mailto:info-vertexsoftware@gmx.net?subject=Beta-Zugang%20TourPulse%20AI" className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-sand-200/40 px-6 py-3 text-sm font-semibold text-sand-50 transition hover:bg-pine-800">Alternativ per E-Mail anfragen <Icon className="h-4 w-4">{icons.mail}</Icon></a>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-sand-100/60">Ihre Angaben werden nur zur Bearbeitung der Beta-Anmeldung gespeichert. Es wird keine E-Mail automatisch versendet.</p>
           </div>
 
           <div className="lg:col-span-5">
