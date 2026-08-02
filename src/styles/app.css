@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  /* Karla: warme, menschliche Grotesk statt technischem Inter */
+  --font-sans: "Karla", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  /* Fraunces: editoriale Serif mit Charakter (SOFT/WONK-Achsen) */
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  /* Caveat: handgeschriebene Notizen */
+  --font-hand: "Caveat", "Segoe Script", "Bradley Hand", cursive;
+
+  /* Ruhige Pinien-Grüntöne – Hauptfarbe der Marke */
+  --color-pine-50: #f3f7f6;
+  --color-pine-100: #e2ecea;
+  --color-pine-200: #c4d9d5;
+  --color-pine-300: #9abeb8;
+  --color-pine-400: #6b9d95;
+  --color-pine-500: #4d827a;
+  --color-pine-600: #3a6862;
+  --color-pine-700: #315450;
+  --color-pine-800: #2a4542;
+  --color-pine-900: #253a38;
+  --color-pine-950: #10211f;
+
+  /* Warme Sandtöne – Akzente für die Gastgeber-Branche */
+  --color-sand-50: #fbf8f3;
+  --color-sand-100: #f5eee2;
+  --color-sand-200: #eadcc5;
+  --color-sand-300: #dcc39f;
+  --color-sand-400: #cba778;
+  --color-sand-500: #be905a;
+  --color-sand-600: #b07a49;
+  --color-sand-700: #92623e;
+  --color-sand-800: #775037;
+  --color-sand-900: #624330;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    @apply bg-sand-50 text-pine-950 antialiased;
+    overflow-x: clip;
+  }
+
+  /* Anker springen nicht unter den fixen Header */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  ::selection {
+    @apply bg-sand-200 text-pine-950;
+  }
+}
+
+/* Fraunces mit SOFT + WONK: deutlich charmanter, leicht unregelmäßig,
+   editorial statt Template-Look. */
+.font-display {
+  font-variation-settings: "SOFT" 40, "WONK" 1;
+}
