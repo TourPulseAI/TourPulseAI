@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  HandNote,
   LegalPage,
-  Placeholder,
   getBusinessName,
 } from "~/components/site";
 
@@ -16,8 +14,6 @@ export const Route = createFileRoute("/datenschutz")({
         content:
           "Datenschutzerklärung der Website TourPulse AI – ehrliche Informationen darüber, welche Daten beim Besuch der Seite verarbeitet werden.",
       },
-      // Solange Platzhalter sichtbar sind, soll die Seite nicht indexiert werden.
-      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
   component: Datenschutz,
@@ -58,16 +54,6 @@ function Datenschutz() {
 
   return (
     <LegalPage businessName={businessName}>
-      {/* Deutlich sichtbarer Hinweis – Seite noch nicht final */}
-      <div className="rounded-2xl border-2 border-pine-900 bg-pine-950 px-5 py-4 text-sand-50 shadow-lg shadow-pine-900/15 sm:px-6">
-        <HandNote className="text-sand-200">Wichtiger Hinweis</HandNote>
-        <p className="mt-1 text-sm leading-relaxed text-sand-100/85">
-          Diese Datenschutzerklärung ist noch nicht final – die Betreiberdaten
-          werden nachgereicht. Solange Platzhalter sichtbar sind, ist die Seite
-          nicht für den öffentlichen Live-Betrieb bestimmt.
-        </p>
-      </div>
-
       <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight text-pine-950 sm:text-4xl">
         Datenschutzerklärung
       </h1>
@@ -85,14 +71,12 @@ function Datenschutz() {
           </P>
           <div className="mt-3 space-y-2 text-[15px] leading-relaxed text-pine-900/80 sm:text-base">
             <p>
-              <Placeholder>
-                [Vollständiger Name oder Firmenname des Betreibers]
-              </Placeholder>
+              Katharina Seebacher
             </p>
             <p>
-              <Placeholder>[Straße Hausnummer]</Placeholder>
+              Estermannstraße 1
               <br />
-              <Placeholder>[PLZ Ort]</Placeholder>
+              83075 Bad Feilnbach
             </p>
             <p>E-Mail: {contact}</p>
           </div>
