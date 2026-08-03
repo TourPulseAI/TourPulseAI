@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  HandNote,
   LegalPage,
-  Placeholder,
   getBusinessName,
 } from "~/components/site";
 
@@ -14,10 +12,8 @@ export const Route = createFileRoute("/impressum")({
       {
         name: "description",
         content:
-          "Impressum der Website TourPulse AI – Angaben gemäß § 5 DDG. Betreiberdaten folgen, sobald sie feststehen.",
+          "Impressum der Website TourPulse AI – Angaben gemäß § 5 DDG. Mit vollständigen Angaben zur Betreiberin.",
       },
-      // Solange Platzhalter sichtbar sind, soll die Seite nicht indexiert werden.
-      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
   component: Impressum,
@@ -49,16 +45,6 @@ function Impressum() {
   const businessName = Route.useLoaderData() || "TourPulse AI";
   return (
     <LegalPage businessName={businessName}>
-      {/* Deutlich sichtbarer Hinweis – Seite noch nicht final */}
-      <div className="rounded-2xl border-2 border-pine-900 bg-pine-950 px-5 py-4 text-sand-50 shadow-lg shadow-pine-900/15 sm:px-6">
-        <HandNote className="text-sand-200">Wichtiger Hinweis</HandNote>
-        <p className="mt-1 text-sm leading-relaxed text-sand-100/85">
-          Dieses Impressum ist noch nicht final – die Betreiberdaten werden
-          nachgereicht. Solange Platzhalter sichtbar sind, ist die Seite nicht
-          für den öffentlichen Live-Betrieb bestimmt.
-        </p>
-      </div>
-
       <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight text-pine-950 sm:text-4xl">
         Impressum
       </h1>
@@ -72,14 +58,12 @@ function Impressum() {
           <BlockTitle>Anbieter / Verantwortlich</BlockTitle>
           <div className="mt-3 space-y-2 text-[15px] leading-relaxed text-pine-900/80 sm:text-base">
             <p>
-              <Placeholder>
-                [Vollständiger Name oder Firmenname des Betreibers]
-              </Placeholder>
+              Katharina Seebacher
             </p>
             <p>
-              <Placeholder>[Straße Hausnummer]</Placeholder>
+              Estermannstraße 1
               <br />
-              <Placeholder>[PLZ Ort]</Placeholder>
+              83075 Bad Feilnbach
             </p>
           </div>
         </section>
@@ -98,18 +82,9 @@ function Impressum() {
               </a>
             </p>
             <p>
-              Telefon: <Placeholder>[Telefon, optional]</Placeholder>
+              
             </p>
           </div>
-        </section>
-
-        {/* USt-ID */}
-        <section>
-          <BlockTitle>Umsatzsteuer</BlockTitle>
-          <P>
-            Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:{" "}
-            <Placeholder>[USt-IdNr., falls vorhanden]</Placeholder>
-          </P>
         </section>
 
         {/* MStV */}
@@ -119,14 +94,12 @@ function Impressum() {
           </BlockTitle>
           <div className="mt-3 space-y-2 text-[15px] leading-relaxed text-pine-900/80 sm:text-base">
             <p>
-              <Placeholder>
-                [Vollständiger Name oder Firmenname des Betreibers]
-              </Placeholder>
+              Katharina Seebacher
             </p>
             <p>
-              <Placeholder>[Straße Hausnummer]</Placeholder>
+              Estermannstraße 1
               <br />
-              <Placeholder>[PLZ Ort]</Placeholder>
+              83075 Bad Feilnbach
             </p>
           </div>
         </section>
