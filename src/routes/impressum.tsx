@@ -8,11 +8,11 @@ export const Route = createFileRoute("/impressum")({
   loader: () => getBusinessName(),
   head: () => ({
     meta: [
-      { title: "Impressum – TourPulse AI" },
+      { title: "Impressum – TourPulse" },
       {
         name: "description",
         content:
-          "Impressum der Website TourPulse AI – Angaben gemäß § 5 DDG. Mit vollständigen Angaben zur Betreiberin.",
+          "Impressum der Website TourPulse – Angaben gemäß § 5 DDG. Mit vollständigen Angaben zur Betreiberin.",
       },
     ],
   }),
@@ -42,7 +42,7 @@ function P({ children }: { children: React.ReactNode }) {
 }
 
 function Impressum() {
-  const businessName = Route.useLoaderData() || "TourPulse AI";
+  const businessName = Route.useLoaderData() || "TourPulse";
   return (
     <LegalPage businessName={businessName}>
       <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight text-pine-950 sm:text-4xl">
@@ -80,9 +80,6 @@ function Impressum() {
               >
                 info-vertexsoftware@gmx.net
               </a>
-            </p>
-            <p>
-              
             </p>
           </div>
         </section>

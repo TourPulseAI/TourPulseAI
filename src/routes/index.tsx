@@ -106,7 +106,7 @@ function MiniDashboard() {
           <span className="h-2 w-2 rounded-full bg-sand-300" />
         </div>
         <span className="text-[10px] font-medium text-pine-700">
-          TourPulse AI · Dashboard
+          TourPulse · Dashboard
         </span>
         <span className="rounded-full bg-pine-700 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-sand-100">
           Vorschau
@@ -442,7 +442,7 @@ function Audiences() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <p className="max-w-md text-lg leading-relaxed text-pine-900/75">
-                TourPulse AI richtet sich an Betriebe, die selbst führen – und
+                TourPulse richtet sich an Betriebe, die selbst führen – und
                 keine Datenabteilung haben. Ob Hotel, Ferienwohnung,
                 Campingplatz oder Tourenanbieter: Die Bedienung bleibt dieselbe,
                 nur Ihre Zahlen sind anders.
@@ -758,7 +758,7 @@ function BetaCta() {
               {message && <p role="status" className={`mt-4 rounded-lg px-3 py-2 text-sm leading-relaxed ${status === "success" ? "bg-pine-100 text-pine-900" : "bg-red-100 text-red-900"}`}>{message}</p>}
             </form>
 
-            <a href="mailto:info-vertexsoftware@gmx.net?subject=Beta-Zugang%20TourPulse%20AI" className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-sand-200/40 px-6 py-3 text-sm font-semibold text-sand-50 transition hover:bg-pine-800">Alternativ per E-Mail anfragen <Icon className="h-4 w-4">{icons.mail}</Icon></a>
+            <a href="mailto:info-vertexsoftware@gmx.net?subject=Beta-Zugang%20TourPulse" className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-sand-200/40 px-6 py-3 text-sm font-semibold text-sand-50 transition hover:bg-pine-800">Alternativ per E-Mail anfragen <Icon className="h-4 w-4">{icons.mail}</Icon></a>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-sand-100/60">Ihre Angaben werden nur zur Bearbeitung der Beta-Anmeldung gespeichert. Es wird keine E-Mail automatisch versendet.</p>
           </div>
 
@@ -785,7 +785,7 @@ function BetaCta() {
 /* ------------------------------------------------------------------ */
 
 function Home() {
-  const businessName = Route.useLoaderData() || "TourPulse AI";
+  const businessName = Route.useLoaderData() || "TourPulse";
   return (
     <>
       <Header businessName={businessName} home />

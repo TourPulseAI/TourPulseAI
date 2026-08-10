@@ -8,13 +8,16 @@ import type { ReactNode } from "react";
 
 import appCss from "~/styles/app.css?url";
 
-// Aktuelle öffentliche URL (Platzhalter, bis die eigene Domain kommt).
-const PUBLIC_URL = "https://6a7b841d67cf892092cd5b6554589193.ctonew.app";
-const SITE_NAME = "TourPulse AI";
+// Aktuelle öffentliche URL: stabile Vercel-Produktions-URL (Marketingstart).
+// Sobald die eigene Domain tourpulse-ai.de aktiv ist, wird diese Konstante
+// (sowie public/robots.txt, public/sitemap.xml und die og:url/og:image/
+// canonical-Metadaten) auf die Domain umgestellt.
+const PUBLIC_URL = "https://site-team-kathi.vercel.app";
+const SITE_NAME = "TourPulse";
 const OG_IMAGE = `${PUBLIC_URL}/images/hostin.jpg`;
 
 const metaTitle =
-  "TourPulse AI – Auslastung vorhersagen & Preise optimieren für kleine Hotels, Ferienwohnungen & Campingplätze";
+  "TourPulse – Auslastung vorhersagen & Preise optimieren für kleine Hotels, Ferienwohnungen & Campingplätze";
 
 const metaDescription =
   "Software für kleine Hotels, Ferienwohnungen, Campingplätze & Tourenanbieter: Auslastung & Belegung vorhersagen, Preise optimieren, buchungsschwache Zeiten erkennen.";

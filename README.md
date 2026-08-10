@@ -1,6 +1,6 @@
-# TourPulse AI — Website
+# TourPulse — Website
 
-Dieses Repository enthält den Quellcode der öffentlichen Website von **TourPulse AI** – einer SaaS-Plattform für kleine Hotels, Ferienwohnungen, Campingplätze und Tourenanbieter. Das Produkt sagt Gästeankünfte und Auslastung voraus, schlägt passende Zimmerpreise vor, erkennt buchungsschwache Zeiten und gibt Werbe- und Angebotstipps per KI.
+Dieses Repository enthält den Quellcode der öffentlichen Website von **TourPulse** – einer SaaS-Plattform für kleine Hotels, Ferienwohnungen, Campingplätze und Tourenanbieter. Das Produkt sagt Gästeankünfte und Auslastung voraus, schlägt passende Zimmerpreise vor, erkennt buchungsschwache Zeiten und gibt Werbe- und Angebotstipps per KI.
 
 Die Website ist eine deutsche Landingpage, die Produkt, Funktionen und Pakete vorstellt (inklusive des geplanten 24-Stunden-Testangebots).
 

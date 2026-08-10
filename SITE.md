@@ -42,12 +42,14 @@ always-on URL the owner can share and point their own domain at — publish it t
 
 ```bash
 export VERCEL_TOKEN=...   # the team lead collects this from the owner
-bun run go-live           # builds, deploys, makes the project public, prints "LIVE: <url>"
+bun run go-live           # builds, deploys to PRODUCTION, prints "LIVE: <stable-url>"
 ```
 
 `go-live` bundles the SSR handler (via `vercel-entry.ts`, which adapts Vercel's Node function
 signature to the site's web fetch handler) into `.vercel/output` — no Git repo needed — then deploys
-it. It resolves the token's team scope automatically and makes the new project public (new Vercel
+it. It deploys with `--prod`, so the deployment is promoted to the project's **stable production URL**
+(printed as `LIVE:`/`STABLE:`) instead of creating a throwaway preview URL on every run. It resolves
+the token's team scope automatically and makes the new project public (new Vercel
 projects inherit org SSO protection, which would otherwise show a login wall), so the owner only ever
 pastes a `VERCEL_TOKEN`. Pass `DATABASE_URL` in the environment too if the site uses a database. The
 team lead runs this flow and reports the live URL; don't hand-roll hosting or tunnels.

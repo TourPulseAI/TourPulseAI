@@ -46,7 +46,10 @@ ENV_ARGS=()
 if [ -n "${DATABASE_URL:-}" ]; then ENV_ARGS=(-e "DATABASE_URL=$DATABASE_URL"); fi
 
 echo "==> deploying${VERCEL_SCOPE:+ (scope: $VERCEL_SCOPE)}"
-DEPLOY_OUT="$($VERCEL deploy --prebuilt --yes --token "$VERCEL_TOKEN" \
+# --prod promotes the deployment to the project's STABLE production alias
+# (https://<project>-<team>.vercel.app) instead of creating a throwaway
+# preview URL on every run — that stable URL is what the marketing launch uses.
+DEPLOY_OUT="$($VERCEL deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN" \
   --name "$PROJECT_NAME" "${SCOPE_ARGS[@]}" "${ENV_ARGS[@]}" 2>&1)" || {
   printf '%s\n' "$DEPLOY_OUT" >&2
   exit 1
@@ -59,6 +62,30 @@ if [ -z "$LIVE_URL" ]; then
   exit 1
 fi
 
+# Resolve the STABLE production alias (the URL that survives future --prod
+# deploys) from the project, so the printed LIVE URL is the one to share.
+STABLE_URL=""
+if [ -n "$VERCEL_TEAM_ID" ]; then
+  STABLE_URL="$(curl -sf "https://api.vercel.com/v9/projects/${PROJECT_NAME}?teamId=${VERCEL_TEAM_ID}" \
+    -H "Authorization: Bearer $VERCEL_TOKEN" | bun -e '
+      let s = "";
+      for await (const c of Bun.stdin.stream()) s += Buffer.from(c).toString();
+      try {
+        const p = JSON.parse(s);
+        const alias = (p.targets && p.targets.production && p.targets.production.alias) || [];
+        const auto = (p.targets && p.targets.production && p.targets.production.automaticAliases) || [];
+        // automaticAliases[0] is the canonical project URL the --prod deploy
+        // promotes to (e.g. <project>-<team>.vercel.app when <project>.vercel.app
+        // is taken); fall back to any assigned alias.
+        process.stdout.write(auto[0] || alias[0] || "");
+      } catch {}
+    ' 2>/dev/null || true)"
+fi
+if [ -n "$STABLE_URL" ]; then
+  STABLE_URL="https://${STABLE_URL#https://}"
+  echo "STABLE: $STABLE_URL"
+fi
+
 echo "==> making the project public"
 TEAM_QS=""
 if [ -n "${VERCEL_TEAM_ID:-}" ]; then TEAM_QS="?teamId=$VERCEL_TEAM_ID"; fi
@@ -67,4 +94,4 @@ curl -sf -X PATCH "https://api.vercel.com/v9/projects/${PROJECT_NAME}${TEAM_QS}"
   -d '{"ssoProtection":null}' >/dev/null ||
   echo "warning: could not disable SSO protection (site may show a login wall)" >&2
 
-echo "LIVE: $LIVE_URL"
+echo "LIVE: ${STABLE_URL:-$LIVE_URL}"

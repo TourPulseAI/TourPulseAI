@@ -8,11 +8,11 @@ export const Route = createFileRoute("/datenschutz")({
   loader: () => getBusinessName(),
   head: () => ({
     meta: [
-      { title: "Datenschutzerklärung – TourPulse AI" },
+      { title: "Datenschutzerklärung – TourPulse" },
       {
         name: "description",
         content:
-          "Datenschutzerklärung der Website TourPulse AI – ehrliche Informationen darüber, welche Daten beim Besuch der Seite verarbeitet werden.",
+          "Datenschutzerklärung der Website TourPulse – ehrliche Informationen darüber, welche Daten beim Besuch der Seite verarbeitet werden.",
       },
     ],
   }),
@@ -42,7 +42,7 @@ function P({ children }: { children: React.ReactNode }) {
 }
 
 function Datenschutz() {
-  const businessName = Route.useLoaderData() || "TourPulse AI";
+  const businessName = Route.useLoaderData() || "TourPulse";
   const contact = (
     <a
       href="mailto:info-vertexsoftware@gmx.net"
