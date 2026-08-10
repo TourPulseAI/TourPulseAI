@@ -263,7 +263,7 @@ export function Footer({
       <div className="mx-auto mt-10 max-w-6xl border-t border-pine-800 px-4 pt-6 sm:px-6">
         <div className="flex flex-col items-center justify-between gap-3 text-xs text-sand-100/40 md:flex-row md:items-center">
           <p>
-            © 2026 TourPulse AI. Vorschau-Seite: Das Produkt befindet sich in
+            © 2026 TourPulse. Vorschau-Seite: Das Produkt befindet sich in
             Entwicklung, es finden derzeit keine Zahlungen statt. Alle Preise
             sind Vorschau.
           </p>

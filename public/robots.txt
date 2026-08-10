@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://6a7b841d67cf892092cd5b6554589193.ctonew.app/sitemap.xml
+Sitemap: https://site-team-kathi.vercel.app/sitemap.xml
