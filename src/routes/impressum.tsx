@@ -81,9 +81,6 @@ function Impressum() {
                 info-vertexsoftware@gmx.net
               </a>
             </p>
-            <p>
-              
-            </p>
           </div>
         </section>
 

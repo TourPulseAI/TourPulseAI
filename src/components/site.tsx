@@ -308,12 +308,3 @@ export function LegalPage({
     </>
   );
 }
-
-/** Deutlich sichtbarer Platzhalter für noch fehlende Betreiberdaten */
-export function Placeholder({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-md bg-sand-200 px-1.5 py-0.5 font-mono text-[0.9em] font-medium text-pine-900">
-      {children}
-    </span>
-  );
-}
