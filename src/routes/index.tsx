@@ -201,7 +201,8 @@ function Hero({ businessName }: { businessName: string }) {
           </div>
 
           <p className="mt-5 text-sm text-pine-800/60">
-            Noch keine Zahlung, keine Abo-Pflicht – alle Preise sind Vorschau.
+            Noch keine Zahlung, keine Abo-Pflicht – Sie zahlen erst, wenn der
+            Beta-Test startet. Die Paketpreise stehen fest.
           </p>
         </div>
 
@@ -477,9 +478,9 @@ function Audiences() {
 
 const plans = [
   {
-    name: "Basic",
+    name: "Starter",
     tagline: "Für den Einstieg",
-    price: { big: "ab 19 €", small: "/ Monat" },
+    price: { big: "29 €", small: "/ Monat" },
     cta: "Beta-Zugang anfragen",
     featured: false,
     items: [
@@ -494,12 +495,12 @@ const plans = [
   {
     name: "Pro",
     tagline: "Für aktive Gastgeber",
-    price: { big: "ab 49 €", small: "/ Monat" },
+    price: { big: "59 €", small: "/ Monat" },
     cta: "Beta-Zugang anfragen",
     featured: true,
     items: [
       "24 Stunden kostenlos testen (geplant)",
-      "Alles aus Basic",
+      "Alles aus Starter",
       "Intelligente Preisvorschläge (erweitert)",
       "Werbe- & Angebotstipps",
       "KI-Berichte",
@@ -508,9 +509,9 @@ const plans = [
     ],
   },
   {
-    name: "Enterprise",
-    tagline: "Für Hotelketten & größere Betriebe",
-    price: { big: "auf Anfrage", small: "individuell" },
+    name: "Business",
+    tagline: "Für größere Betriebe & individuelle Anforderungen",
+    price: { big: "individuell", small: "nach Absprache" },
     cta: "Beta-Zugang anfragen",
     featured: false,
     items: [
@@ -539,7 +540,7 @@ function Plans() {
           nr="03"
           label="Pakete"
           title="Erst testen, dann entscheiden"
-          note="Vorschau – geplant, nicht final."
+          note="Preise stehen fest – der Test bleibt kostenlos."
         />
 
         {/* Schritt 0: das 24-Stunden-Testangebot */}
@@ -557,7 +558,7 @@ function Plans() {
                   Erst ausprobieren, dann entscheiden: Sobald der Test
                   freigeschaltet ist, schauen Sie sich 24 Stunden lang alles in
                   Ruhe an – am besten mit Ihren eigenen Zahlen. Danach
-                  entscheiden Sie, ob Basic, Pro oder doch nichts für Sie ist.
+                  entscheiden Sie, ob Starter, Pro oder doch nichts für Sie ist.
                 </p>
                 <p className="mt-5 max-w-2xl rounded-xl border border-pine-900/10 bg-white px-4 py-3 text-sm leading-relaxed text-pine-900/70">
                   <strong className="font-semibold text-pine-800">
@@ -627,13 +628,6 @@ function Plans() {
                 >
                   {p.price.small}
                 </span>
-              </p>
-              <p
-                className={`mt-1 text-xs ${
-                  p.featured ? "text-sand-100/60" : "text-pine-900/50"
-                }`}
-              >
-                Vorschau – geplant, noch nicht final
               </p>
 
               <ul className="mt-6 flex-1 space-y-3">
