@@ -46,7 +46,11 @@ ENV_ARGS=()
 if [ -n "${DATABASE_URL:-}" ]; then ENV_ARGS=(-e "DATABASE_URL=$DATABASE_URL"); fi
 
 echo "==> deploying${VERCEL_SCOPE:+ (scope: $VERCEL_SCOPE)}"
-DEPLOY_OUT="$($VERCEL deploy --prebuilt --yes --token "$VERCEL_TOKEN" \
+# --prod is required: without it the CLI creates a preview deployment and the
+# stable project URL (e.g. <project>-<team>.vercel.app) keeps serving the old
+# production deployment. Note: `vercel promote` does NOT carry -e env vars over,
+# so a production deploy must pass them at deploy time via -e (ENV_ARGS).
+DEPLOY_OUT="$($VERCEL deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN" \
   --name "$PROJECT_NAME" "${SCOPE_ARGS[@]}" "${ENV_ARGS[@]}" 2>&1)" || {
   printf '%s\n' "$DEPLOY_OUT" >&2
   exit 1
