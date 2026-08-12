@@ -264,8 +264,8 @@ export function Footer({
         <div className="flex flex-col items-center justify-between gap-3 text-xs text-sand-100/40 md:flex-row md:items-center">
           <p>
             © 2026 TourPulse. Vorschau-Seite: Das Produkt befindet sich in
-            Entwicklung, es finden derzeit keine Zahlungen statt. Alle Preise
-            sind Vorschau.
+            Entwicklung, es finden derzeit keine Zahlungen statt. Die
+            Paketpreise stehen fest.
           </p>
           <nav className="flex shrink-0 items-center gap-5">
             <a href="/impressum" className="transition hover:text-sand-50">
