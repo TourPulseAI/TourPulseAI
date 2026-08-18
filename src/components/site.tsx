@@ -243,7 +243,7 @@ export function Footer({
             Campingplätze und Tourenanbieter.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-sand-200/70">
-            Bald: 24 Stunden kostenlos testen – ohne Zahlungspflicht.
+            Bald: 7 Tage kostenlos testen – ohne Zahlungspflicht.
           </p>
         </div>
 

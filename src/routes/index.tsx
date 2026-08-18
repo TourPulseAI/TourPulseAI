@@ -473,7 +473,7 @@ function Audiences() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Pakete – mit 24h-Test als Schritt 0                                  */
+/* Pakete – mit 7-Tage-Test als Schritt 0                                  */
 /* ------------------------------------------------------------------ */
 
 const plans = [
@@ -484,7 +484,7 @@ const plans = [
     cta: "Beta-Zugang anfragen",
     featured: false,
     items: [
-      "24 Stunden kostenlos testen (geplant)",
+      "7 Tage kostenlos testen (geplant)",
       "Ankunfts- & Auslastungsprognose",
       "Buchungsschwache Zeiten erkennen",
       "Basis-Preisvorschläge",
@@ -499,7 +499,7 @@ const plans = [
     cta: "Beta-Zugang anfragen",
     featured: true,
     items: [
-      "24 Stunden kostenlos testen (geplant)",
+      "7 Tage kostenlos testen (geplant)",
       "Alles aus Starter",
       "Intelligente Preisvorschläge (erweitert)",
       "Werbe- & Angebotstipps",
@@ -515,7 +515,7 @@ const plans = [
     cta: "Beta-Zugang anfragen",
     featured: false,
     items: [
-      "24 Stunden kostenlos testen (geplant)",
+      "7 Tage kostenlos testen (geplant)",
       "Alles aus Pro",
       "Beliebig viele Standorte",
       "Individuelle Integrationen & Onboarding",
@@ -543,7 +543,7 @@ function Plans() {
           note="Preise stehen fest – der Test bleibt kostenlos."
         />
 
-        {/* Schritt 0: das 24-Stunden-Testangebot */}
+        {/* Schritt 0: das 7-Tage-Testangebot */}
         <div className="relative mt-10 overflow-hidden rounded-3xl border-2 border-dashed border-pine-700/40 bg-white/70 p-6 shadow-sm sm:p-10">
           <div className="relative">
             <HandNote className="-rotate-1 text-2xl text-pine-600">
@@ -552,11 +552,11 @@ function Plans() {
             <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <h3 className="font-display text-2xl font-semibold tracking-tight text-pine-950 sm:text-3xl">
-                  Bald: 24 Stunden kostenlos testen – ohne Zahlungspflicht
+                  Bald: 7 Tage kostenlos testen – ohne Zahlungspflicht
                 </h3>
                 <p className="mt-4 max-w-2xl leading-relaxed text-pine-900/75">
                   Erst ausprobieren, dann entscheiden: Sobald der Test
-                  freigeschaltet ist, schauen Sie sich 24 Stunden lang alles in
+                  freigeschaltet ist, schauen Sie sich 7 Tage lang alles in
                   Ruhe an – am besten mit Ihren eigenen Zahlen. Danach
                   entscheiden Sie, ob Starter, Pro oder doch nichts für Sie ist.
                 </p>
@@ -742,7 +742,7 @@ function BetaCta() {
 
             <form onSubmit={submit} className="mt-8 max-w-xl rounded-2xl bg-sand-50 p-5 text-pine-950 shadow-xl sm:p-6">
               <p className="font-display text-xl font-semibold">Auf die Beta-Liste setzen</p>
-              <p className="mt-1 text-sm text-pine-900/65">Bald: 24 Stunden kostenlos testen. Das Test-System ist noch in Entwicklung.</p>
+              <p className="mt-1 text-sm text-pine-900/65">Bald: 7 Tage kostenlos testen. Das Test-System ist noch in Entwicklung.</p>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <label className="text-sm font-semibold">Name <span className="font-normal text-pine-900/55">(optional)</span><input name="name" type="text" maxLength={120} autoComplete="name" className="mt-1.5 w-full rounded-lg border border-pine-900/20 bg-white px-3 py-2.5 font-normal outline-none focus:border-pine-600 focus:ring-2 focus:ring-pine-200" /></label>
                 <label className="text-sm font-semibold">E-Mail <span className="text-pine-600">*</span><input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1.5 w-full rounded-lg border border-pine-900/20 bg-white px-3 py-2.5 font-normal outline-none focus:border-pine-600 focus:ring-2 focus:ring-pine-200" /></label>
