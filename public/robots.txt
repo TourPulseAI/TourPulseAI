@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://site-team-kathi.vercel.app/sitemap.xml
+Sitemap: https://site-ivory-theta-33.vercel.app/sitemap.xml

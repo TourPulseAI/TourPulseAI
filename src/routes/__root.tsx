@@ -9,10 +9,10 @@ import type { ReactNode } from "react";
 import appCss from "~/styles/app.css?url";
 
 // Aktuelle öffentliche URL: stabile Vercel-Produktions-URL (Marketingstart).
-// Sobald die eigene Domain tourpulse-ai.de aktiv ist, wird diese Konstante
+// Eine eigene Domain ist seitens des Eigentümers nicht geplant; diese Konstante
 // (sowie public/robots.txt, public/sitemap.xml und die og:url/og:image/
-// canonical-Metadaten) auf die Domain umgestellt.
-const PUBLIC_URL = "https://site-team-kathi.vercel.app";
+// canonical-Metadaten) zeigt auf die stabile Vercel-Projekt-URL.
+const PUBLIC_URL = "https://site-ivory-theta-33.vercel.app";
 const SITE_NAME = "TourPulse";
 const OG_IMAGE = `${PUBLIC_URL}/images/hostin.jpg`;
 
